@@ -1,8 +1,8 @@
 {
-  "name": "GTO Trainer",
-  "short_name": "GTO Trainer",
-  "description": "Solver-grounded GTO poker training for BTN vs BB spots.",
-  "lang": "en",
+  "name": "GTOトレーナー",
+  "short_name": "GTOトレーナー",
+  "description": "BTN対BBのスポットをSolverデータで学ぶGTOポーカートレーニング。",
+  "lang": "ja",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

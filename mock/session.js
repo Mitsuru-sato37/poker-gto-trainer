@@ -4,11 +4,11 @@ export const SESSION_STORAGE_KEY = 'poker-gto-trainer.mock-session.v1';
 const SESSION_VERSION = 1;
 
 const MODE_LABELS = {
-  RANDOM: 'Random · 10 Questions',
-  PREFLOP: 'Preflop · 10 Questions',
-  'FLOP+': 'Flop+ · 10 Questions',
-  PLAY_THROUGH: 'Play Through · 3 Hands',
-  REVIEW: 'Review Mistakes',
+  RANDOM: 'ランダム · 10問',
+  PREFLOP: 'プリフロップ · 10問',
+  'FLOP+': 'フロップ+ · 10問',
+  PLAY_THROUGH: 'ハンドを通して練習 · 3ハンド',
+  REVIEW: 'ミスを復習',
 };
 
 function normalItems(type, catalog) {

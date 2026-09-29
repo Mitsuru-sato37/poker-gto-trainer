@@ -27,6 +27,7 @@ Last updated: 2026-09-29
 - Review sessions preserve an in-progress normal session in a separate local resume slot, so starting review does not discard unfinished training.
 - Added a canonical solution-library index builder that validates every input before registering a deterministic `solutionId:heroCombo` question identity.
 - Added PWA install metadata, app icons, service-worker offline shell caching, and manifest MIME handling to the browser mock.
+- Localized the mock trainer UI and PWA metadata to Japanese while retaining `BEST` / `GOOD` / `MISTAKE` evaluation labels and English poker action labels.
 - Added a GitHub Pages Actions workflow that publishes only `mock/` over the repository's HTTPS Pages URL.
 - Confirmed against the upstream CLI source that saved solutions are versioned full-tree files and `solver show --combo` exposes frequencies; per-action EVs still require the workbench/export path or an upstream export extension, so no unsafe flat-file parser was added.
 

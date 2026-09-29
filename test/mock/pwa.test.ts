@@ -21,3 +21,17 @@ test('PWA service worker caches the complete browser shell', () => {
   assert.match(serviceWorker, /skipWaiting/);
   assert.match(serviceWorker, /clients\.claim/);
 });
+
+test('mock UI uses Japanese copy while preserving evaluation labels', () => {
+  const app = readFileSync(join(mockRoot, 'app.js'), 'utf8');
+  const session = readFileSync(join(mockRoot, 'session.js'), 'utf8');
+  const manifest = JSON.parse(readFileSync(join(mockRoot, 'manifest.webmanifest'), 'utf8'));
+
+  for (const copy of ['トレーニング', '問題', '次へ', 'セッション完了', '復習', 'フォールド', 'チェック', 'コール', 'ベット', 'レイズ']) {
+    assert.match(`${app}\n${session}`, new RegExp(copy, 'u'));
+  }
+  for (const label of ['BEST', 'GOOD', 'MISTAKE']) assert.match(app, new RegExp(label, 'u'));
+  assert.equal(manifest.name, 'GTOトレーナー');
+  assert.equal(manifest.short_name, 'GTOトレーナー');
+  assert.equal(manifest.lang, 'ja');
+});

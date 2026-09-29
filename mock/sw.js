@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gto-trainer-pwa-v1';
+const CACHE_NAME = 'gto-trainer-pwa-v2';
 const APP_SHELL = [
   './',
   './index.html',

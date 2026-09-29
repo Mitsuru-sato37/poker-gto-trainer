@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Mitsuru-sato37/poker-gto-trainer/schema/canonical-solution-v1.schema.json",
+  "title": "Canonical GTO decision node v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "solutionId", "game", "spot", "heroCombo", "actions", "strategy", "bestEv", "provenance"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "solutionId": { "type": "string", "minLength": 1 },
+    "game": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "playerCount", "blinds", "ante", "effectiveStack", "chipUnit"],
+      "properties": {
+        "type": { "const": "NLHE" },
+        "playerCount": { "type": "integer", "minimum": 2 },
+        "blinds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["small", "big"],
+          "properties": { "small": { "type": "number", "minimum": 0 }, "big": { "type": "number", "minimum": 0 } }
+        },
+        "ante": { "type": "number", "minimum": 0 },
+        "effectiveStack": { "type": "number", "minimum": 0 },
+        "chipUnit": { "const": "chips" }
+      }
+    },
+    "spot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["positions", "pot", "street", "board", "actionHistory", "playerToAct"],
+      "properties": {
+        "positions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["inPosition", "outOfPosition"],
+          "properties": { "inPosition": { "type": "string" }, "outOfPosition": { "type": "string" } }
+        },
+        "pot": { "type": "number", "minimum": 0 },
+        "street": { "enum": ["preflop", "flop", "turn", "river"] },
+        "board": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/card" }, "maxItems": 5 },
+        "actionHistory": { "type": "array", "items": { "$ref": "#/$defs/historyAction" } },
+        "playerToAct": { "type": "string", "minLength": 1 }
+      }
+    },
+    "heroCombo": { "type": "string", "pattern": "^[2-9TJQKA][cdhs][2-9TJQKA][cdhs]$" },
+    "actions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/action" } },
+    "strategy": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/strategy" } },
+    "bestEv": { "type": "number" },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "card": { "type": "string", "pattern": "^[2-9TJQKA][cdhs]$" },
+    "actionKind": { "enum": ["fold", "check", "call", "bet", "raise", "all-in"] },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind"],
+      "properties": { "id": { "type": "string", "minLength": 1 }, "kind": { "$ref": "#/$defs/actionKind" }, "amount": { "type": "number", "minimum": 0 }, "potFraction": { "type": "number", "minimum": 0 } }
+    },
+    "historyAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["street", "actor", "actionId", "kind"],
+      "properties": { "street": { "enum": ["preflop", "flop", "turn", "river"] }, "actor": { "type": "string", "minLength": 1 }, "actionId": { "type": "string", "minLength": 1 }, "kind": { "$ref": "#/$defs/actionKind" }, "amount": { "type": "number", "minimum": 0 } }
+    },
+    "strategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actionId", "frequency", "ev"],
+      "properties": { "actionId": { "type": "string", "minLength": 1 }, "frequency": { "type": "number", "minimum": 0, "maximum": 1 }, "ev": { "type": "number" } }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["solver", "solverVersion", "sourceRevision", "rawFormatVersion", "generatedAt", "configSha256", "rawArtifactSha256", "solve"],
+      "properties": {
+        "solver": { "type": "string", "minLength": 1 }, "solverVersion": { "type": "string", "minLength": 1 }, "sourceRevision": { "oneOf": [{ "type": "string", "pattern": "^[0-9a-f]{40}$" }, { "type": "null" }] }, "rawFormatVersion": { "type": "integer", "minimum": 0 }, "generatedAt": { "type": "string", "format": "date-time" }, "configSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "rawArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "execution": { "type": "object", "additionalProperties": false, "required": ["kind"], "properties": { "kind": { "type": "string", "minLength": 1 }, "url": { "type": "string", "format": "uri" } } },
+        "actionEv": { "type": "object", "additionalProperties": false, "required": ["source", "precision"], "properties": { "source": { "type": "string", "minLength": 1 }, "precision": { "type": "number", "exclusiveMinimum": 0 } } },
+        "solve": { "type": "object", "additionalProperties": false, "required": ["iterations", "exploitabilityChips", "exploitabilityPctOfPot"], "properties": { "iterations": { "type": "integer", "minimum": 0 }, "exploitabilityChips": { "type": "number", "minimum": 0 }, "exploitabilityPctOfPot": { "type": "number", "minimum": 0 } } }
+      }
+    }
+  }
+}

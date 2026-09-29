@@ -1,0 +1,87 @@
+{
+  "questionId": "btn-bb-srp-qh7s2c-node0:QcQd",
+  "solutionId": "btn-bb-srp-qh7s2c-node0",
+  "game": {
+    "type": "NLHE",
+    "playerCount": 6,
+    "blinds": {
+      "small": 10,
+      "big": 20
+    },
+    "ante": 0,
+    "effectiveStack": 2000,
+    "chipUnit": "chips"
+  },
+  "positions": {
+    "inPosition": "BTN",
+    "outOfPosition": "BB"
+  },
+  "pot": 110,
+  "street": "flop",
+  "board": [
+    "Qh",
+    "7s",
+    "2c"
+  ],
+  "actionHistory": [
+    {
+      "street": "preflop",
+      "actor": "UTG",
+      "actionId": "fold",
+      "kind": "fold"
+    },
+    {
+      "street": "preflop",
+      "actor": "HJ",
+      "actionId": "fold",
+      "kind": "fold"
+    },
+    {
+      "street": "preflop",
+      "actor": "CO",
+      "actionId": "fold",
+      "kind": "fold"
+    },
+    {
+      "street": "preflop",
+      "actor": "BTN",
+      "actionId": "raise-to-50",
+      "kind": "raise",
+      "amount": 50
+    },
+    {
+      "street": "preflop",
+      "actor": "SB",
+      "actionId": "fold",
+      "kind": "fold"
+    },
+    {
+      "street": "preflop",
+      "actor": "BB",
+      "actionId": "call-30",
+      "kind": "call",
+      "amount": 30
+    }
+  ],
+  "playerToAct": "BB",
+  "heroCombo": "QcQd",
+  "bestEv": 55,
+  "actions": [
+    {
+      "id": "check",
+      "kind": "check",
+      "frequency": 0.705661,
+      "ev": 54.86,
+      "evLoss": 0.14
+    },
+    {
+      "id": "bet-36.4",
+      "kind": "bet",
+      "amount": 36.4,
+      "potFraction": 0.33,
+      "frequency": 0.294339,
+      "ev": 55,
+      "evLoss": 0
+    }
+  ]
+}

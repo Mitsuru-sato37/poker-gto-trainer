@@ -1,0 +1,38 @@
+{
+  "format_version": 1,
+  "solver": {
+    "name": "ucsandman/postflop",
+    "version": "0.1.0",
+    "source_revision": null,
+    "execution": {
+      "kind": "official-hosted-wasm-workbench",
+      "url": "https://postflop-workbench.vercel.app/"
+    },
+    "action_ev": {
+      "source": "Official Inspector combo rows; title attributes report action EV to 0.001bb, converted at 20 chips/bb",
+      "precision": 0.02
+    }
+  },
+  "meta": {
+    "iterations": 50,
+    "exploitability_chips": 0.0409,
+    "exploitability_pct_of_pot": 0.0372
+  },
+  "decision": {
+    "node": 0,
+    "player": "OOP",
+    "actions": [
+      { "source_id": "check", "kind": "Check" },
+      { "source_id": "bet-to-1.82bb", "kind": "Bet", "amount": 36.4, "pot_fraction": 0.33 }
+    ],
+    "combos": [
+      {
+        "cards": "QcQd",
+        "actions": [
+          { "source_id": "check", "frequency": 0.705661, "ev": 54.86 },
+          { "source_id": "bet-to-1.82bb", "frequency": 0.294339, "ev": 55.0 }
+        ]
+      }
+    ]
+  }
+}

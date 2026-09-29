@@ -1,0 +1,30 @@
+{
+  "solutionId": "btn-bb-srp-qh7s2c-node0",
+  "game": {
+    "type": "NLHE",
+    "playerCount": 6,
+    "blinds": { "small": 10, "big": 20 },
+    "ante": 0,
+    "effectiveStack": 2000,
+    "chipUnit": "chips"
+  },
+  "spot": {
+    "positions": { "inPosition": "BTN", "outOfPosition": "BB" },
+    "pot": 110,
+    "street": "flop",
+    "board": ["Qh", "7s", "2c"],
+    "actionHistory": [
+      { "street": "preflop", "actor": "UTG", "actionId": "fold", "kind": "fold" },
+      { "street": "preflop", "actor": "HJ", "actionId": "fold", "kind": "fold" },
+      { "street": "preflop", "actor": "CO", "actionId": "fold", "kind": "fold" },
+      { "street": "preflop", "actor": "BTN", "actionId": "raise-to-50", "kind": "raise", "amount": 50 },
+      { "street": "preflop", "actor": "SB", "actionId": "fold", "kind": "fold" },
+      { "street": "preflop", "actor": "BB", "actionId": "call-30", "kind": "call", "amount": 30 }
+    ],
+    "playerToAct": "BB"
+  },
+  "heroCombo": "QcQd",
+  "sourceNode": 0,
+  "generatedAt": "2026-09-28T11:23:18.495Z",
+  "configSha256": "fb8c59006a4abba7831e8583034d8dba3f5a2c30d5280126be4594fe91424be3"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "poker-gto-trainer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test test/**/*.test.ts",
+    "check": "node --experimental-strip-types --check src/canonical/types.ts && node --experimental-strip-types --check src/canonical/validate.ts && node --experimental-strip-types --check src/adapters/postflop.ts && node --experimental-strip-types --check src/questions/read-question.ts && node --experimental-strip-types --check src/proof/verify-proof.ts && node --experimental-strip-types --check src/library/index.ts && node --experimental-strip-types --check src/cli/canonicalize.ts && node --experimental-strip-types --check src/cli/read-question.ts && node --experimental-strip-types --check src/cli/verify-proof.ts && node --experimental-strip-types --check src/cli/build-library-index.ts",
+    "proof": "node src/cli/verify-proof.ts",
+    "library:index": "node src/cli/build-library-index.ts",
+    "mock": "node scripts/serve-mock.mjs"
+  }
+}

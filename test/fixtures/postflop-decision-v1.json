@@ -1,0 +1,30 @@
+{
+  "format_version": 1,
+  "solver": {
+    "name": "ucsandman/postflop",
+    "version": "0.1.0",
+    "source_revision": "0123456789abcdef0123456789abcdef01234567"
+  },
+  "meta": {
+    "iterations": 500,
+    "exploitability_chips": 0.2,
+    "exploitability_pct_of_pot": 0.1538
+  },
+  "decision": {
+    "node": 1,
+    "player": "IP",
+    "actions": [
+      { "source_id": "a0", "kind": "Check" },
+      { "source_id": "a1", "kind": "Bet", "amount": 42.9, "pot_fraction": 0.33 }
+    ],
+    "combos": [
+      {
+        "cards": "AsJs",
+        "actions": [
+          { "source_id": "a1", "frequency": 0.75, "ev": 52.5 },
+          { "source_id": "a0", "frequency": 0.25, "ev": 51.125 }
+        ]
+      }
+    ]
+  }
+}

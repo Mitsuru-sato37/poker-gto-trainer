@@ -28,6 +28,7 @@ Last updated: 2026-09-29
 - Added a canonical solution-library index builder that validates every input before registering a deterministic `solutionId:heroCombo` question identity.
 - Added PWA install metadata, app icons, service-worker offline shell caching, and manifest MIME handling to the browser mock.
 - Added a GitHub Pages Actions workflow that publishes only `mock/` over the repository's HTTPS Pages URL.
+- Updated the Pages workflow to explicitly enable the repository Pages site before deployment.
 - Confirmed against the upstream CLI source that saved solutions are versioned full-tree files and `solver show --combo` exposes frequencies; per-action EVs still require the workbench/export path or an upstream export extension, so no unsafe flat-file parser was added.
 
 ## In progress

@@ -1,16 +1,20 @@
 # Specification entry point
 
-This file is the fixed specification entry point for Codex sessions. It intentionally indexes the existing source-of-truth documents instead of duplicating them.
+This file is the fixed specification entry point for cross-PC Codex work. It intentionally does not duplicate detailed project documents.
 
 ## Canonical sources
 
-1. `docs/PRODUCT_SPEC.md` — product scope and phases.
-2. `docs/ARCHITECTURE.md` — architecture and boundaries.
-3. `docs/DECISIONS.md` — durable architecture/product decisions.
-4. `AGENTS.md` — repository operating rules.
+Read these in order:
 
-Solver output remains the source of truth for strategy, frequency, and EV data.
+1. `AGENTS.md` — project instructions and current implementation rules.
+2. `README.md` — project overview and development commands.
+3. `docs/PRODUCT_SPEC.md` — authoritative product scope and phases.
+4. `docs/ARCHITECTURE.md` — architecture and Phase 0 boundaries.
+5. `docs/DECISIONS.md` — durable technical decisions.
+6. `docs/PROGRESS.md` — detailed implementation progress and next work.
+
+When these documents differ in responsibility, use the document that owns that decision. Do not duplicate the full product specification in this file.
 
 ## Update rule
 
-When product scope or architecture changes, update the canonical document above in the same change. Keep this file stable so every PC has one known starting path.
+Update the owning canonical document whenever product scope, architecture, technical decisions, or implementation status changes. Keep this file as a stable index so any Codex session starts from the same path.

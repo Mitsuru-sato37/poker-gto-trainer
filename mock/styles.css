@@ -93,6 +93,7 @@ h1 em { color: var(--accent-strong); font-style: normal; }
 .spot-line strong span { color: var(--muted); font-weight: 500; }
 .spot-line > span { color: var(--muted); font-size: .875rem; white-space: nowrap; }
 .data-source { display: flex; align-items: center; gap: 8px; margin: -4px 0 12px; color: var(--good); font-size: .72rem; font-weight: 900; letter-spacing: .08em; }
+.data-source.warning { color: var(--accent-strong); }
 .hero-card { display: flex; justify-content: space-between; align-items: end; gap: 12px; padding: 18px; background: linear-gradient(135deg, #e6f2ff, #f5f9ff); border: 1px solid #bad4ef; border-radius: var(--radius) var(--radius) 0 0; }
 .board { display: block; margin-top: 4px; font-size: 1.05rem; letter-spacing: .05em; }
 .pot-stat { text-align: right; }
@@ -152,6 +153,11 @@ h1 em { color: var(--accent-strong); font-style: normal; }
 .ev-callout > span:last-child { grid-column: 1 / -1; color: var(--muted); font-size: .875rem; }
 .why-card { margin-top: 12px; padding: 18px; background: #fff8e9; border: 1px solid #efd49a; border-radius: 14px; }
 .why-card p { margin: 6px 0 10px; color: var(--text); font-size: 1rem; }
+.range-explainer { margin: -5px 0 12px; color: var(--muted); font-size: .875rem; }
+.range-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: -2px 0 12px; color: var(--muted); font-size: .75rem; font-weight: 800; }
+.legend-swatch { display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px; background: var(--surface); border: 1px solid var(--line); border-radius: 3px; }
+.legend-swatch.hero { background: var(--accent); border-color: var(--accent-strong); }
+.range-unavailable { padding: 14px; background: var(--surface-soft); border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); font-size: .875rem; }
 .range-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
 .range-cell { display: grid; place-items: center; min-height: 42px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 7px; color: var(--muted); font-size: .67rem; text-align: center; }
 .range-cell.hero { color: #1a1408; background: var(--accent); border-color: var(--accent-strong); font-weight: 900; }

@@ -50,6 +50,10 @@ function persistHistory() {
   window.localStorage.setItem(HISTORY_STORAGE_KEY, serializeHistory(appState.history));
 }
 
+function resetViewport() {
+  if (typeof window.scrollTo === 'function') window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+}
+
 function current() {
   return getCurrentItem(appState.session, catalog);
 }
@@ -227,7 +231,7 @@ function renderProblemSummary(problem, item) {
   }).join('');
   return `<div class="question-meta"><span class="eyebrow">${handLabel}</span><span class="progress-track"><span style="width:${((appState.session.currentIndex + 1) / appState.session.items.length) * 100}%"></span></span></div>
     <div class="spot-line"><strong>${problem.heroPosition} <span>対</span> ${problem.villainPosition}</strong><span>${problem.potType} · ${problem.stackSize}BB</span></div>
-    ${problem.dataSource ? `<div class="data-source"><span class="status-dot"></span>実Solver検証済み · ${escapeHtml(problem.solutionId)}</div>` : ''}
+    ${problem.dataSource ? `<div class="data-source"><span class="status-dot"></span>実Solver検証済み · ${escapeHtml(problem.solutionId)}</div>` : '<div class="data-source warning"><span class="status-dot"></span>仮データ（GTOではありません）</div>'}
     <div class="hero-card">
       <div><span class="eyebrow">ボード</span><strong class="board">${problem.board.length ? problem.board.map(escapeHtml).join(' ') : 'プリフロップ'}</strong></div>
       <div class="pot-stat"><span class="eyebrow">ポット</span><strong>${problem.potSize} BB</strong></div>
@@ -257,17 +261,19 @@ function renderFrequencyRows(problem, selectedAction) {
 }
 
 function renderRange(problem) {
-  return `<section class="range-section"><div class="section-heading"><div><span class="eyebrow">一部のレンジ</span><h2>近いハンド</h2></div><button class="text-button" aria-disabled="true" data-action="unavailable">全レンジ</button></div><div class="range-grid">${problem.rangeData.flat().map((cell) => `<span class="range-cell ${cell === problem.heroHand ? 'hero' : ''}">${escapeHtml(cell)}</span>`).join('')}</div></section>`;
+  const cells = problem.rangeData.flat();
+  return `<section class="range-section"><div class="section-heading"><div><span class="eyebrow">代表的なコンボ</span><h2>近いハンド</h2></div><button class="text-button" aria-disabled="true" data-action="unavailable">全レンジ表示は準備中</button></div><p class="range-explainer">ここに表示しているのは、今回のハンドと比較しやすい代表的なコンボです。GTOレンジ全体の一覧ではありません。</p><div class="range-legend"><span><i class="legend-swatch hero"></i>今回のハンド</span><span><i class="legend-swatch"></i>比較用のコンボ</span></div>${cells.length ? `<div class="range-grid">${cells.map((cell) => `<span class="range-cell ${cell === problem.heroHand ? 'hero' : ''}">${escapeHtml(cell)}</span>`).join('')}</div>` : '<div class="range-unavailable">この問題では代表コンボをまだ表示できません。</div>'}</section>`;
 }
 
 function renderFeedback() {
   const { problem, item } = current();
   const selectedAction = problem.availableActions.find((entry) => entry.id === appState.feedback.actionId);
+  const isSolverBacked = Boolean(problem.dataSource);
   return `${renderHeader(true)}
     <main class="screen feedback-screen">
-      <div class="feedback-summary"><strong>${escapeHtml(problem.heroHand)}</strong><span>${problem.board.join(' ') || 'プリフロップ'} · ポット ${problem.potSize}BB</span><span>${escapeHtml(localizeHistoryLabel(problem.actionHistory[0].label))}</span></div>
+      <div class="feedback-summary"><strong>${escapeHtml(problem.heroHand)}</strong><span>${problem.board.join(' ') || 'プリフロップ'} · ポット ${problem.potSize}BB</span><span>${escapeHtml(localizeHistoryLabel(problem.actionHistory[0].label))}</span>${problem.dataSource ? '<span class="data-source">実Solver検証済み</span>' : ''}</div>
       <div class="evaluation-banner ${evaluationClass(selectedAction.evaluation)}"><span class="evaluation-icon">${selectedAction.evaluation === 'BEST' ? '✓✓' : selectedAction.evaluation === 'GOOD' ? '✓' : '×'}</span><div><span class="eyebrow">あなたの選択</span><strong>${escapeHtml(localizeActionLabel(selectedAction.label))}</strong></div><span class="evaluation-word">${selectedAction.evaluation}</span></div>
-      <section class="strategy-section"><div class="section-heading"><div><span class="eyebrow">GTO戦略</span><h2>混合戦略</h2></div><span class="muted">${problem.potSize} BBポット</span></div>${renderFrequencyRows(problem, selectedAction)}</section>
+      <section class="strategy-section"><div class="section-heading"><div><span class="eyebrow">${isSolverBacked ? 'GTO戦略' : '仮データ（GTOではありません）'}</span><h2>${isSolverBacked ? '混合戦略' : '表示例'}</h2></div><span class="muted">${problem.potSize} BBポット</span></div>${renderFrequencyRows(problem, selectedAction)}</section>
       <section class="ev-callout"><span class="eyebrow">EV損失</span><strong>${selectedAction.evLoss === 0 ? '0.00' : `-${selectedAction.evLoss.toFixed(2)}`} BB</strong><span>アクションEV ${selectedAction.ev.toFixed(2)} BB · 最大 ${Math.max(...problem.availableActions.map((entry) => entry.ev)).toFixed(2)} BB</span></section>
       <section class="why-card"><span class="eyebrow">理由</span><p>${escapeHtml(problem.whyText)}</p><button class="text-button" aria-disabled="true" data-action="unavailable">詳しく見る</button></section>
       ${renderRange(problem)}
@@ -304,6 +310,7 @@ function render() {
   if (appState.screen === 'question') app.innerHTML = renderQuestion();
   if (appState.screen === 'feedback') app.innerHTML = renderFeedback();
   if (appState.screen === 'result') app.innerHTML = renderResult();
+  resetViewport();
   app.querySelectorAll('[data-action="new-session"]').forEach((button) => button.addEventListener('click', showNewSession));
   app.querySelectorAll('[data-action="continue"]').forEach((button) => button.addEventListener('click', continueSession));
   app.querySelectorAll('[data-action="review"]').forEach((button) => button.addEventListener('click', startReview));

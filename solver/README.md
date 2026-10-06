@@ -27,3 +27,7 @@ npm run proof
 ```
 
 This reruns the adapter and question reader and compares their results to the committed artifacts. It does not rerun the hosted solve. Full CLI solve/export/adapter automation remains the next data-foundation task.
+
+## EV-bearing extraction boundary
+
+The repository exposes `npm run extract:postflop -- RAW_EXPORT_JSON JOBS_JSON OUTPUT_JSON` for an export whose requested combo rows contain both `frequency` and `ev` for every source action. The command rejects missing EVs and validates every result through the existing adapter and canonical validator. The upstream Workbench's downloaded full JSON currently contains strategy frequencies but not those per-action EV rows, so it cannot be used as trainer ground truth by itself; retain it under ignored `.local/` storage and use an official EV-bearing export or audited Inspector rows.

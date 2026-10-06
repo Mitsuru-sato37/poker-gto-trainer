@@ -1,7 +1,7 @@
 # Status
 
 Status: Active cross-PC handoff entry point
-Last updated: 2026-10-05
+Last updated: 2026-10-06
 
 This file is the stable handoff entry point. Detailed progress remains authoritative in `docs/PROGRESS.md`.
 
@@ -16,7 +16,7 @@ This file is the stable handoff entry point. Detailed progress remains authorita
 
 Update this field at the end of each meaningful development session.
 
-`main` unless `docs/PROGRESS.md` records another active handoff branch.
+`codex/solver-ev-library-expansion`
 
 ## Next
 

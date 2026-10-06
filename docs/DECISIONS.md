@@ -83,3 +83,9 @@ Treat the upstream solution file as a versioned full-tree artifact, not as a fla
 Ship the current trainer UI as an installable PWA first: static HTTPS hosting, manifest, icons, service-worker shell caching, and browser-local history. A later App Store/Google Play release may wrap the same web app with Capacitor; a separate Swift/Kotlin rewrite is not part of the current MVP.
 
 GitHub Pages is the first hosting target because the repository already has a GitHub remote and Pages provides the HTTPS origin required for browser installation. The deployment workflow publishes only `mock/`; no Solver binaries, ignored `.local/` data, or secrets are included.
+
+## ADR-014 — Official JSON export is not sufficient without combo EV rows
+
+**Status:** Accepted — 2026-09-29
+
+The official workbench JSON export was inspected and downloaded for a real turn solve. It contains node action vectors, combo ordering, and per-combo strategy frequencies, but not per-action EV values. The Inspector UI displays those EV rows separately. Therefore the trainer ingestion path accepts only an EV-bearing export or an audited Inspector extraction; it never derives EV from frequency, regret, or exported aggregate values. Until additional EV-bearing records are available, remaining mock entries are explicitly labeled as non-GTO example data.
